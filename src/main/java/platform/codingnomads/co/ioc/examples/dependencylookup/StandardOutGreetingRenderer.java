@@ -15,6 +15,7 @@ public class StandardOutGreetingRenderer implements GreetingRenderer {
 
     @Override
     public void setGreetingProvider(GreetingProvider greetingProvider) {
+
         this.greetingProvider = greetingProvider;
     }
 
