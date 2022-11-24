@@ -15,6 +15,12 @@ public class LaptopConfiguration {
 
     @Bean
     public OS os() {
-        return new OS("ubuntu");
+        return new OS("Ubuntu MATE");
     }
+
+    @Bean
+    public RAM ram() { return new RAM("DRAM");}
+
+    @Bean
+    public GPU gpu() { return new GPU("GPU-2000");}
 }
