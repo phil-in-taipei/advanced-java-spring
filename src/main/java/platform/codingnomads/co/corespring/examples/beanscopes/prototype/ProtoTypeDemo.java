@@ -11,10 +11,16 @@ public class ProtoTypeDemo {
         ctx.refresh();
 
         SpringBean springBean1 = ctx.getBean(SpringBean.class);
-        System.out.println("Hash code: " + springBean1.hashCode());
+        System.out.println("Hash code for 1st Bean: " + springBean1.hashCode());
 
         SpringBean springBean2 = ctx.getBean(SpringBean.class);
-        System.out.println("Hash code: " + springBean2.hashCode());
+        System.out.println("Hash code for 1st Bean: " + springBean2.hashCode());
+
+        SpringBean2 springBeanOne = ctx.getBean(SpringBean2.class);
+        System.out.println("Hash code for 2nd Bean: " + springBeanOne.hashCode());
+
+        SpringBean2 springBeanTwo = ctx.getBean(SpringBean2.class);
+        System.out.println("Hash code for 2nd Bean: " + springBeanTwo.hashCode());
 
         ctx.close();
     }

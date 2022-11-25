@@ -9,7 +9,7 @@ public class ComponentScanDemo {
 
     public static void main(String[] args) {
         applicationContext = new AnnotationConfigApplicationContext(ComponentScanConfiguration.class);
-        isBeanPresent("framework", "JDK", "motherboard", "OS", "sampleBean","componentScanConfiguration");
+        isBeanPresent("framework", "JDK", "motherboard", "OS", "book", "webtutorial", "sampleBean","componentScanConfiguration");
     }
 
     private static void isBeanPresent(String... beans) {

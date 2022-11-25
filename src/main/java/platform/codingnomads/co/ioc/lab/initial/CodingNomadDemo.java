@@ -9,7 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 // included in later labs. It would not be required otherwise
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}) //
 public class CodingNomadDemo {
-
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(
                 CodingNomadConfiguration.class);

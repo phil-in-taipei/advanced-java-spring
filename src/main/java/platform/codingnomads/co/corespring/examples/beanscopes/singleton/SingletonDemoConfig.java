@@ -11,4 +11,8 @@ public class SingletonDemoConfig {
     public SpringBean springBean() {
         return new SpringBean();
     }
+
+    @Bean
+    @Scope(value = "singleton")
+    public SpringBean2 springBean2() { return new SpringBean2(); }
 }
