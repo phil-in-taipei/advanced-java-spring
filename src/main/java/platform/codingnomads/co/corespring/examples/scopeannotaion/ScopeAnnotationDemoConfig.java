@@ -14,8 +14,20 @@ public class ScopeAnnotationDemoConfig {
     }
 
     @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public SingletonBean2 singletonBean2() {
+        return new SingletonBean2();
+    }
+
+    @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public PrototypeBean prototypeBean() {
         return new PrototypeBean();
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public PrototypeBean2 prototypeBean2() {
+        return new PrototypeBean2();
     }
 }

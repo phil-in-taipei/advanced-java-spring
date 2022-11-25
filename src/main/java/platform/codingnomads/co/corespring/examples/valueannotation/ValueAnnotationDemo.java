@@ -16,6 +16,7 @@ public class ValueAnnotationDemo {
         nomad.getWorkingDays().forEach(System.out::println);
         System.out.println(nomad.getDatabaseValues());
         System.out.println(nomad.nomadIdentity());
+        System.out.println("This is from the demo practice: " + nomad.getVariable());
         ctx.close();
     }
 }

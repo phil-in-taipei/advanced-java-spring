@@ -21,6 +21,13 @@ public class Nomad {
     @Value("Hello!!")
     private String greeting;
 
+    @Value("${nomadExample.variable}")
+    private String variable;
+
+    public String getVariable() {
+        return variable;
+    }
+
     @Value("${nomad.framework}")
     private String framework;
 
