@@ -29,4 +29,12 @@ public class Driver {
             cascade = CascadeType.PERSIST
     )
     private Car car;
+
+
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            optional = false,
+            cascade = CascadeType.PERSIST
+    )
+    private Sponsor sponsor;
 }
