@@ -11,6 +11,9 @@ public class App {
     @Value("${app.version}")
     private String appVersion;
 
+    @Value("${app.framework}")
+    private String appFramework;
+
     public String getAppName() {
         return appName;
     }
@@ -18,4 +21,6 @@ public class App {
     public String getAppVersion() {
         return appVersion;
     }
+
+    public String getAppFramework() { return appFramework; }
 }

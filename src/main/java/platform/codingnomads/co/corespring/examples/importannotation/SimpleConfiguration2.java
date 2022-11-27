@@ -1,14 +1,11 @@
 package platform.codingnomads.co.corespring.examples.importannotation;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(SimpleConfiguration2.class)
-public class ImportAnnotationConfig {
+public class SimpleConfiguration2 {
     @Bean
-    public Framework framework() {
-        return new Framework();
+    public SpringDeveloper2 springDeveloper2() {
+        return new SpringDeveloper2();
     }
 }
