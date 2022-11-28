@@ -3,6 +3,7 @@ package platform.codingnomads.co.springdata.example.ddl.manytoone.unidirectional
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,4 +20,8 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private List<Reply> replies;
 }

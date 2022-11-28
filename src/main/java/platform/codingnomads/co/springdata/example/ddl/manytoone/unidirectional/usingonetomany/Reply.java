@@ -1,16 +1,13 @@
-package platform.codingnomads.co.springdata.example.ddl.manytoone.bidirectional;
-
+package platform.codingnomads.co.springdata.example.ddl.manytoone.unidirectional.usingonetomany;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comment {
-
+public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,14 +17,4 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
-
-    @ManyToOne(
-            cascade = CascadeType.ALL,
-            optional = false
-    )
-    private Post post;
-
-    @OneToMany(mappedBy = "comment")
-    private Set<Reply> replies;
-
 }
