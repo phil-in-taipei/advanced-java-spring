@@ -1,6 +1,7 @@
 package platform.codingnomads.co.springdata.example.ddl.manytomany.jointableexample;
 
 import lombok.*;
+//import platform.codingnomads.co.springdata.example.ddl.manytomany.bidirectional.Tag;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -27,10 +28,12 @@ public class Post {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            //change join table name
-            name = "post_location_join_table",
-            //specify a column named location_latitude referencing the latitude column in the locations table
             inverseJoinColumns = @JoinColumn(name = "location_latitude", referencedColumnName = "latitude")
     )
     private Set<Location> locations;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            inverseJoinColumns = @JoinColumn(name = "tag_name", referencedColumnName = "name")
+    )
+    private Set<Tag> tags;
 }
