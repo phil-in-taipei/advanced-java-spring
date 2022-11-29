@@ -39,16 +39,30 @@ public class JpaRepoDemo implements CommandLineRunner {
             softDrinkRepo.save(sd);
         }
 
+        SoftDrink mellowYellow = SoftDrink.builder().name("Mellow Yellow").rating(4).build();
+        SoftDrink rc = SoftDrink.builder().name("RC Cola").rating(4).build();
+        SoftDrink tab = SoftDrink.builder().name("Tab").rating(4).build();
+        List<SoftDrink> insertedSoftDrinks2 = softDrinkRepo.saveAll(List.of(mellowYellow, rc, tab));
+        for (SoftDrink sd : insertedSoftDrinks2) {
+            sd.setName(sd.getName().toUpperCase());
+            softDrinkRepo.save(sd);
+        }
+
+        softDrinkRepo.flush();
+
+
+
         System.out.println("ALL SOFT DRINKS IN DESCENDING ORDER BASED ON ID");
         //get all soft drinks in ascending order and print toString() to the console
-        softDrinkRepo.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(System.out::println);
+        //softDrinkRepo.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(System.out::println);
+        softDrinkRepo.findAll(Sort.by(Sort.Direction.ASC, "name")).forEach(System.out::println);
 
         //find all using an example
         System.out.println("FINDING ALL USING EXAMPLE");
         softDrinkRepo.findAll(
                         Example.of(
                                 //probe soft drink to match results with
-                                SoftDrink.builder().rating(0).build(),
+                                SoftDrink.builder().rating(4).build(),
                                 //ask that database entries that match any of the fields in the probe be returned
                                 ExampleMatcher.matchingAny())
                 )
