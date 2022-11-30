@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import platform.codingnomads.co.springdata.example.dml.derivedquerymethods.codewarriorexample.CodeWarrior;
-import platform.codingnomads.co.springdata.example.dml.derivedquerymethods.codewarriorexample.EmailAddress;
-import platform.codingnomads.co.springdata.example.dml.derivedquerymethods.plantexample.Plant;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +52,15 @@ public class ExampleApplication implements CommandLineRunner {
                 .icing(vanillaIcing)
                 .build();
 
-        final List<Cake> cakes = Arrays.asList(birthdayCake, weddingCake, graduationCake);
+        Cake getWellSoonCake = Cake.builder()
+                .cakeName("get well soon")
+                .price(40.00)
+                .icing(vanillaIcing)
+                .build();
+
+        final List<Cake> cakes = Arrays.asList(
+                birthdayCake, weddingCake, graduationCake, getWellSoonCake
+        );
 
         if (cakeRepo.findAll().isEmpty()) {
             cakeRepo.saveAll(cakes);
@@ -63,11 +68,36 @@ public class ExampleApplication implements CommandLineRunner {
 
         cakeRepo.flush();
 
-        final List<Cake> chocolateCakes = cakeRepo.findByCakeNameIs("chocolate");
+        final List<Cake> birthdayCakes = cakeRepo.findByCakeNameIs("birthday");
+        System.out.println();
 
         System.out.println("***************************************************findByCakeNameIs***************************************************");
-        for (Cake c: chocolateCakes) {
-            System.out.println(c);
+        System.out.println("There are this many items in the query: " + birthdayCakes.size());
+        for (Cake cake: birthdayCakes) {
+            System.out.println(cake);
+        }
+
+        final List<Cake> vanillaIcingCakes = cakeRepo.findByIcing_FlavorIs("vanilla");
+        System.out.println();
+
+        System.out.println("***************************************************findByIcing_FlavorIs***************************************************");
+        System.out.println("There are this many items in the query: " + vanillaIcingCakes.size());
+        for (Cake cake: vanillaIcingCakes) {
+            System.out.println(cake);
+        }
+
+        List<Cake> cheapCakes =  cakeRepo.findByPriceLessThan(40.00);
+        System.out.println("***************************************************findByPriceLessThan***************************************************");
+        System.out.println("There are this many items in the query: " + cheapCakes.size());
+        for (Cake cake: cheapCakes) {
+            System.out.println(cake);
+        }
+
+        List<Cake> expensiveCakes =  cakeRepo.findByPriceGreaterThanEqual(40.00);
+        System.out.println("***************************************************findByPriceGreaterThanEqual**********************************************");
+        System.out.println("There are this many items in the query: " + expensiveCakes.size());
+        for (Cake cake: expensiveCakes) {
+            System.out.println(cake);
         }
     }
 

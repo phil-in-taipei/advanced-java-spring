@@ -9,6 +9,10 @@ public interface CakeRepo extends JpaRepository<Cake, Long>  {
 
     List<Cake> findByCakeNameIs(String cakeName);
 
-    Cake findByIcing_Flavor(String flavor);
+    List<Cake> findByIcing_FlavorIs(String flavor);
+
+    List<Cake> findByPriceLessThan(double price);
+
+    List<Cake> findByPriceGreaterThanEqual(double price);
 
 }
