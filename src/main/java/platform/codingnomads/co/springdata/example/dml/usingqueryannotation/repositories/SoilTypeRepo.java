@@ -14,6 +14,11 @@ import java.util.ArrayList;
 @Repository
 public interface SoilTypeRepo extends JpaRepository<SoilType, Long> {
 
+    @Query(value = "SELECT s FROM SoilType s")
+    ArrayList<SoilType>  getAllSoilTypes(Sort sort);
+    @Query(value = "SELECT count(s.id) FROM SoilType s")
+    int findNumberOfSoilTypes();
+
     @Query("SELECT s FROM SoilType s WHERE dry = true")
     ArrayList<SoilType> findDrySoilType(Sort sort);
     @Query("SELECT s FROM SoilType s WHERE ph > ?1 AND ph < ?2")

@@ -40,6 +40,7 @@ public class SoilTypeService {
 
     @Transactional
     public void getStuff() {
+
         System.out.println("DRY SOILS");
         ArrayList<SoilType> soils = soilTypeRepo.findDrySoilType(Sort.by(Sort.Order.asc("name")));
 
@@ -73,7 +74,16 @@ public class SoilTypeService {
 
          } while (page.hasNext());
 
+        System.out.println("NUMBER OF SOIL TYPES");
+        int numberOfSoilTypes = soilTypeRepo.findNumberOfSoilTypes();
+        System.out.println(numberOfSoilTypes);
 
+        System.out.println("ALL SOILS");
+        ArrayList<SoilType> allSoilTypes = soilTypeRepo.getAllSoilTypes(Sort.by(Sort.Order.desc("id")));
+
+        for (SoilType soil : allSoilTypes) {
+            System.out.println(soil.toString());
+        }
 
     }
 }
