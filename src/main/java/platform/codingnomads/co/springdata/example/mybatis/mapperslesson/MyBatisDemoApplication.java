@@ -40,16 +40,51 @@ public class MyBatisDemoApplication {
             song2.setArtist_name("Gus Dapperton");
             song2.setSong_length(279);
 
+            Song song4 = new Song();
+            song4.setName("Long Song");
+            song4.setAlbum_name("More Songs");
+            song4.setArtist_name("Song Smith");
+            song4.setSong_length(500);
+
+            Song song5 = new Song();
+            song5.setName("Short Song");
+            song5.setAlbum_name("Even More Songs");
+            song5.setArtist_name("Song Smith");
+            song5.setSong_length(30);
+
             songMapper.insertNewSong(song1);
             songMapper.insertNewSong(song2);
+            songMapper.insertNewSong(song4);
+            songMapper.insertNewSong(song5);
 
-            Song song3 = songMapper.getSongById(1L);
+            Song song3 = songMapper.getSongById(17L); // just manually update (by 2)
+
+            int rowsDeleted =   songMapper.deleteSongById(23L);
+            System.out.println("Rows deleted: " + rowsDeleted);
+
+            song5.setName("Short Short Song");
+            songMapper.updateSong(song5);
+
 
             ArrayList<Song> longSongs = songMapper.getSongsWithLengthGreaterThan(250);
+
+            System.out.println("These are some long songs:");
 
             longSongs.forEach(System.out::println);
 
             System.out.println(song3.toString());
+
+            ArrayList<Song> bonIverSongs = songMapper.getSongsByArtist("Song Smith");
+
+            System.out.println("These are some Song Smith songs:");
+
+            bonIverSongs.forEach(System.out::println);
+
+            ArrayList<Song> songSmithSongs = songMapper.getSongsByArtistWithLengthGreaterThan(
+                    "Bon Iver", 200);
+            System.out.println("These are some Bong Iver songs longer than 200:");
+
+            songSmithSongs.forEach(System.out::println);
         };
     }
 }
