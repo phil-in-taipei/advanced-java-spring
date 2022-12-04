@@ -18,6 +18,11 @@ public class PointService {
 
     //@Transactional I
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void bar() {
+        repo.getOne(1L);
+    }
+
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void doSomeWork() {
         Point p = new Point(1,1);
@@ -30,6 +35,20 @@ public class PointService {
             In order to call the foo() method - we must have an existing transaction (MANDATORY)
          */
         foo();
+    }
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    public void doSomeOtherWork() {
+        Point p = new Point(1,1);
+        repo.save(p);
+
+        p = new Point(2,2);
+        repo.save(p);
+
+        /*
+            bar() method - SUPPORTS existing transaction
+         */
+        bar();
     }
 
     @Transactional(propagation = Propagation.MANDATORY)
@@ -89,7 +108,7 @@ public class PointService {
     public void noRollbackFor() throws InterruptedException{
         Point p = repo.getOne(2L);
         p.setX(4);
-        p.setX(20);
+        p.setX(22);
         repo.save(p);
         throw new InterruptedException();
         //changes still commit
