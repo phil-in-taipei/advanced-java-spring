@@ -65,6 +65,22 @@ public class QueryDSLDemo implements CommandLineRunner {
 
         routesByCodeAndOrigin.forEach(System.out::println);
 
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Route queried by destination Route Custom Query:");
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        final List<Route> routesByDestination = routeRepository.findAllRoutesBySearchQuery(SearchQuery.builder().destination("B").build());
+        routesByDestination.forEach(System.out::println);
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Route queried by ID Custom Query:");
+        System.out.println("------------------------------------------------------------------------------------------");
+        final List<Route> routesByID = routeRepository.findAllRoutesBySearchQuery(SearchQuery.builder().id(2L).build());
+        System.out.println("This is the query result for ID 2");
+        routesByID.forEach(System.out::println);
+        System.out.println("------------------------------------------------------------------------------------------");
+
         //query the database straight-up without using repository
         QArea qArea = QArea.area;
         JPAQuery<?> query = new JPAQuery<>(entityManager);
@@ -73,6 +89,23 @@ public class QueryDSLDemo implements CommandLineRunner {
                 .where(qArea.code.eq("A"))
                 .fetchOne();
         System.out.println(area);
+
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Area queried by name with JPA Query:");
+        System.out.println("------------------------------------------------------------------------------------------");
+        Area areaByName = query.select(qArea)
+                .from(qArea)
+                .where(qArea.name.eq("B"))
+                .fetchOne();
+        System.out.println(areaByName);
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("Area queried by name with Custom Repo:");
+        System.out.println("------------------------------------------------------------------------------------------");
+
+        Area a = areaRepository.findByName("F");
+        System.out.println(a);
+        System.out.println("------------------------------------------------------------------------------------------");
+
 
         routeRepository.deleteAll();
         areaRepository.deleteAll();

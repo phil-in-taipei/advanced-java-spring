@@ -17,4 +17,10 @@ public class AreaCustomRepositoryImpl extends QuerydslRepositorySupport implemen
         QArea area = QArea.area;
         return from(area).where(area.code.eq(code)).fetchOne();
     }
+
+    @Override
+    public Area findByName(String name) {
+        QArea area = QArea.area;
+        return from(area).where(area.name.eq(name)).fetchOne();
+    }
 }

@@ -4,4 +4,6 @@ import platform.codingnomads.co.springdata.example.querydsl.models.Area;
 
 public interface AreaCustomRepository {
     Area findByCode(String code);
+
+    Area findByName(String name);
 }
