@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,11 +45,21 @@ public class Route implements Serializable {
     )
     private Area destination;
 
+    @ManyToMany(mappedBy = "routes")
+    private List<PlaceLocatedAlongRoute> placesLocatedAlongRoutes;
+
     @Builder
     public Route(Area origin, Area destination, String code) {
         this.origin = origin;
         this.destination = destination;
         this.code = (origin.getCode() + "-" + destination.getCode());
-        //this.code = code;
+    }
+
+    public void addPlaceLocatedAlongRoute(PlaceLocatedAlongRoute placeLocatedAlongRoute) {
+        if (this.placesLocatedAlongRoutes == null) {
+            this.placesLocatedAlongRoutes = new ArrayList<>(Collections.singletonList(placeLocatedAlongRoute));
+        } else {
+            this.placesLocatedAlongRoutes.add(placeLocatedAlongRoute);
+        }
     }
 }

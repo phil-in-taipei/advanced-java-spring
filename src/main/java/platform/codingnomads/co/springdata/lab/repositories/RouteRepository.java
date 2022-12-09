@@ -3,6 +3,10 @@ package platform.codingnomads.co.springdata.lab.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import platform.codingnomads.co.springdata.lab.models.Route;
 
-public interface RouteRepository extends JpaRepository<Route,Long> {
+import java.util.List;
 
+public interface RouteRepository extends JpaRepository<Route,Long> {
+    List<Route> findAllByCodeContaining(String code);
+
+   Route findByCode(String code);
 }
