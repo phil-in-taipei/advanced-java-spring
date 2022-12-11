@@ -1,4 +1,4 @@
-package platform.codingnomads.co.springweb.resttemplate.GET.getForEntity;
+package platform.codingnomads.co.springweb.resttemplate.GET.getForEntityMyTrial;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,16 +9,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import platform.codingnomads.co.springweb.resttemplate.GET.models.KanyeTemplate;
+import platform.codingnomads.co.springweb.resttemplate.GET.models.BoredTemplate;
 
 @SpringBootApplication
-public class GetForEntityDemo {
+public class BoredApiGet {
 
     @Autowired
     RestTemplate restTemplate;
 
     public static void main(String[] args) {
-        SpringApplication.run(GetForEntityDemo.class, args);
+        SpringApplication.run(BoredApiGet.class, args);
     }
 
     @Bean
@@ -29,18 +29,23 @@ public class GetForEntityDemo {
     @Bean
     public CommandLineRunner run() throws Exception {
         return args -> {
-            System.out.println("Starting the api command line runner in get entity for demo");
-
-            ResponseEntity<KanyeTemplate> responseEntity =
-                    restTemplate.getForEntity("https://api.kanye.rest", KanyeTemplate.class);
-
+            System.out.println("Starting the api command line runner in bored api");
+            ResponseEntity<BoredTemplate> responseEntity =
+                    restTemplate.getForEntity(
+                            "https://www.boredapi.com/api/activity?participants={participants}",
+                            BoredTemplate.class,
+                            1
+                    );
             if (responseEntity.getStatusCode().equals(HttpStatus.OK) && responseEntity.getBody() != null) {
                 System.out.println("The api request has gone through");
-                KanyeTemplate kanyeTemplate = responseEntity.getBody();
-                System.out.println(kanyeTemplate.getQuote());
+
+                BoredTemplate boredTemplate = responseEntity.getBody();
+                System.out.println("This is the boredTemplate");
+                System.out.println(boredTemplate.toString());
             } else {
                 System.out.println("Something went wrong! The response was not marked with status code 200");
             }
         };
     }
+
 }
