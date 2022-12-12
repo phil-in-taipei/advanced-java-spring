@@ -1,4 +1,4 @@
-package platform.codingnomads.co.springweb.resttemplate.POST.postForEntity;
+package platform.codingnomads.co.springweb.resttemplate.POST.postForEntityMyTrial;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,18 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import platform.codingnomads.co.springweb.resttemplate.POST.models.ResponseObject;
-import platform.codingnomads.co.springweb.resttemplate.POST.models.Task;
+import platform.codingnomads.co.springweb.resttemplate.POST.models.User;
+import platform.codingnomads.co.springweb.resttemplate.POST.models.UserResponseObject;
 
 import java.util.Objects;
 
 @SpringBootApplication
-public class postForEntityMain {
-
+public class postForEntityMyTrialMain {
     @Autowired
     RestTemplate restTemplate;
 
     public static void main(String[] args) {
-        SpringApplication.run(postForEntityMain.class, args);
+        SpringApplication.run(postForEntityMyTrialMain.class, args);
     }
 
     @Bean
@@ -32,17 +32,14 @@ public class postForEntityMain {
     @Bean
     public CommandLineRunner run() throws Exception {
         return args -> {
-            Task newTask = Task.builder()
-                    .name("learn how to use postForEntity()")
-                    .description("get comfortable using the RestTemplate postForEntity() method")
-                    .userId(396)
-                    .completed(false)
+            User newUser = User.builder()
+                    .email("sb@gmx.com")
+                    .first_name("Sue")
+                    .last_name("Blue")
                     .build();
-
-            ResponseEntity<ResponseObject> responseEntity = restTemplate
-                    .postForEntity("http://demo.codingnomads.co:8080/tasks_api/tasks", newTask,
-                            ResponseObject.class);
-
+            ResponseEntity<UserResponseObject> responseEntity = restTemplate
+                    .postForEntity("http://demo.codingnomads.co:8080/tasks_api/users", newUser,
+                            UserResponseObject.class);
             if (responseEntity.getStatusCode().equals(HttpStatus.CREATED)) {
                 System.out.println(Objects.requireNonNull(responseEntity.getBody()));
             } else {

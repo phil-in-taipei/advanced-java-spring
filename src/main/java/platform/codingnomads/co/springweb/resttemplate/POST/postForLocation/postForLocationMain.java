@@ -35,7 +35,7 @@ public class postForLocationMain {
             Task newTask = Task.builder()
                     .name("learn how to use postForLocation()")
                     .description("get comfortable using the RestTemplate postForLocation() method")
-                    .userId(5)
+                    .userId(396)
                     .completed(false)
                     .build();
 
