@@ -33,9 +33,9 @@ public class postForEntityMyTrialMain {
     public CommandLineRunner run() throws Exception {
         return args -> {
             User newUser = User.builder()
-                    .email("sb@gmx.com")
-                    .first_name("Sue")
-                    .last_name("Blue")
+                    .email("LarryMcGoo@gmx.com")
+                    .first_name("McGoo")
+                    .last_name("Larry")
                     .build();
             ResponseEntity<UserResponseObject> responseEntity = restTemplate
                     .postForEntity("http://demo.codingnomads.co:8080/tasks_api/users", newUser,
