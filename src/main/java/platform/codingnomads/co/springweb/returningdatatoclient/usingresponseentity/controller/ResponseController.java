@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import platform.codingnomads.co.springweb.returningdatatoclient.usingresponseentity.model.User;
+import platform.codingnomads.co.springweb.returningdatatoclient.usingresponseentity.model.RandomClass;
+
 
 import java.net.URI;
 
@@ -14,6 +16,8 @@ import java.net.URI;
 public class ResponseController {
 
     User user = new User(1, "Test User", "test@email.com");
+
+    RandomClass random = new RandomClass (1, "Blah blah blah");
 
     @GetMapping("/constructor")
     public ResponseEntity<User> constructorMethod() {
@@ -28,6 +32,13 @@ public class ResponseController {
         return ResponseEntity.created(URI.create("/users/" + user.getId()))
                 .header("TEST", "TEST HEADER")
                 .body(user);
+    }
+
+    @GetMapping("/practice")
+    public ResponseEntity<RandomClass> builderPracticeMethod() {
+        return ResponseEntity.created(URI.create("/practice/" + random.getId()))
+                .header("TEST", "TEST HEADER")
+                .body(random);
     }
 
     @GetMapping("/users/{id}")

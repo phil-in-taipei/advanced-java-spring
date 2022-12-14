@@ -37,7 +37,7 @@ public class deleteMain {
             Task newTask = Task.builder()
                     .name("should be deleted")
                     .description("used in a delete RestTemplate example. If you see this something went wrong. Oops")
-                    .userId(5)
+                    .userId(412)
                     .completed(false)
                     .build();
 
@@ -72,8 +72,7 @@ public class deleteMain {
             //delete using exchange()
             HttpEntity<Task> httpEntity = new HttpEntity<>(newTask);
             try {
-                restTemplate.exchange("http://demo.codingnomads.co:8080/tasks_api/tasks/"
-                        + newTask.getId(), HttpMethod.DELETE, httpEntity, ResponseObject.class);
+                restTemplate.exchange("http://demo.codingnomads.co:8080/tasks_api/tasks/" + newTask.getId(), HttpMethod.DELETE, httpEntity, ResponseObject.class);
             } catch (HttpClientErrorException e) {
                 System.out.println(e.getMessage());
             }

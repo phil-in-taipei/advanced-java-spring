@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import platform.codingnomads.co.springweb.resttemplate.POST.models.User;
-import platform.codingnomads.co.springweb.resttemplate.POST.models.UserResponseObject;
+import platform.codingnomads.co.springweb.resttemplate.DELETE.models.User;
+import platform.codingnomads.co.springweb.resttemplate.DELETE.models.UserResponseObject;
 
 import java.util.Objects;
 
@@ -42,7 +42,7 @@ public class deleteUserMain {
                     .build();
 
             User newUser2 = User.builder()
-                    .email("mmmmmm@gmx.com")
+                    .email("j!????dskjdsm@gmx.com")
                     .first_name("Colin")
                     .last_name("Schamllin")
                     .build();
@@ -66,13 +66,8 @@ public class deleteUserMain {
             restTemplate.delete("http://demo.codingnomads.co:8080/tasks_api/users/" + newUser.getId());
             System.out.println("The user was also successfully deleted");
 
-            /*try {
-                restTemplate.getForEntity(
-                        "http://demo.codingnomads.co:8080/tasks_api/users/"
-                                + newUser.getId(), UserResponseObject.class);
-            } catch (HttpClientErrorException e) {
-                System.out.println(e.getMessage());
-            } */
+
+
 
             responseEntity = restTemplate
                     .postForEntity("http://demo.codingnomads.co:8080/tasks_api/users", newUser2,
@@ -86,11 +81,24 @@ public class deleteUserMain {
                 System.out.println(Objects.requireNonNull(responseEntity.getBody()).getError());
             }
 
-            /*HttpEntity<User> httpEntity = new HttpEntity<>(newUser2);
+            try {
+                restTemplate.getForEntity(
+                        "http://demo.codingnomads.co:8080/tasks_api/users/"
+                                + newUser2.getId(), UserResponseObject.class);
+            } catch (HttpClientErrorException e) {
+                System.out.println(e.getMessage());
+            }
 
+            System.out.println(newUser2);
+
+            restTemplate.delete("http://demo.codingnomads.co:8080/tasks_api/users/" + newUser2.getId());
+
+
+            /*HttpEntity<User> httpEntity = new HttpEntity<User>(newUser2);
+            System.out.println(httpEntity);
             try {
                 restTemplate.exchange("http://demo.codingnomads.co:8080/tasks_api/users/"
-                        + newUser2.getId(), HttpMethod.DELETE, httpEntity, UserResponseObject.class);
+                + newUser2.getId(), HttpMethod.DELETE, httpEntity, UserResponseObject.class);
             } catch (HttpClientErrorException e) {
                 System.out.println(e.getMessage());
             } */

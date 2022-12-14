@@ -17,6 +17,18 @@ public class UserController {
             .email("dev@codingnomads.co")
             .build();
 
+    public User user2 = User.builder()
+            .id(1001)
+            .name("Spring Dev2")
+            .email("dev@codingnomads2.co")
+            .build();
+
+    public User user3 = User.builder()
+            .id(1002)
+            .name("Spring Dev3")
+            .email("dev@codingnomads3.co")
+            .build();
+
     //using ResponseBody to return a POJO
     @ResponseBody
     @GetMapping("/response-body")
@@ -34,6 +46,13 @@ public class UserController {
     @GetMapping("/user")
     public User user() {
         return user;
+    }
+
+    @ResponseBody
+    @GetMapping("/user-list")
+    public User[] userListBody() {
+        User[]  userArray =  {user, user2, user3};
+        return userArray;
     }
 
 }
