@@ -36,7 +36,8 @@ public class postForObjectMyTrialMain {
                     .build();
 
             UserResponseObject userReturnedByServerAfterPost = restTemplate
-                    .postForObject("http://demo.codingnomads.co:8080/tasks_api/users", newUser, UserResponseObject.class);
+                    .postForObject("http://demo.codingnomads.co:8080/tasks_api/users",
+                            newUser, UserResponseObject.class);
 
             if (userReturnedByServerAfterPost != null) {
                 System.out.println(userReturnedByServerAfterPost);

@@ -19,6 +19,17 @@ public class TaskController {
         return "ID: " + id;
     }
 
+    @GetMapping(value = "/completed-get",produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getCompleted(@RequestParam Boolean completed) {
+        return "Completed: " + completed;
+    }
+
+    @GetMapping(value = "/completed",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task getCompletedTask(@RequestParam(required = false, defaultValue = "false") Boolean completed) {
+        return Task.builder().name("Task with completed param").completed(completed).build();
+    }
+
+
     @GetMapping(value = "/param-name-variable-name-different", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTaskWithDifferentParamAndVariableName(@RequestParam(name = "id") Long taskId) {
         return "ID: " + taskId;
@@ -44,4 +55,13 @@ public class TaskController {
                 .mapToObj(i -> Task.builder().id((long) i).name(names.get(i)).build())
                 .collect(Collectors.toList());
     }
+
+    @GetMapping(value = "/request-ids", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Task> getTasksWithIDsRequestParam(@RequestParam(name = "ids") List<Long> ids) {
+        return IntStream.range(0, ids.size())
+                .mapToObj(i -> Task.builder().id((long) i).id(ids.get(i)).build())
+                .collect(Collectors.toList());
+    }
+
+
 }

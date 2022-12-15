@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import platform.codingnomads.co.springweb.resttemplate.POST.models.UserResponseObject;
 import platform.codingnomads.co.springweb.resttemplate.POST.models.User;
-import platform.codingnomads.co.springweb.resttemplate.POST.postForEntityMyTrial.postForEntityMyTrialMain;
+//import platform.codingnomads.co.springweb.resttemplate.POST.postForEntityMyTrial.postForEntityMyTrialMain;
 
 import java.net.URI;
 import java.util.Objects;
