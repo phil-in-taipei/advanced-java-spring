@@ -21,6 +21,14 @@ public class TaskController {
         return Task.builder().id(id).name(name).completed(completed).build();
     }
 
+    @GetMapping(value = "/modified/{id}/{name}/{completed}")
+    public Task getTaskModified(@PathVariable(name = "id") Long id,
+                                @PathVariable(name = "name") String name,
+                                @PathVariable(name = "completed") Boolean completed) {
+
+        return Task.builder().id(id+1).name(name.toUpperCase()).completed(!completed).build();
+    }
+
     @GetMapping(value = {"/path-variable-optional", "/path-variable-optional/{name}"})
     public String pathVariableOptional(@PathVariable(required = false) String name) {
         if (!StringUtils.isEmpty(name)) {
@@ -44,9 +52,27 @@ public class TaskController {
         return name;
     }
 
+    @GetMapping(value = "/task-request-param", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task getTaskRequestParam(@RequestParam String name) {
+        return Task.builder()
+                .id(Long.valueOf(1))
+                .name(name)
+                .completed(false)
+                .build();
+    }
+
     @GetMapping(value = "/path-variable-not-encoded/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String pathVariableIsNotEncoded(@PathVariable String name) {
         return name;
+    }
+
+    @GetMapping(value = "/task-request-path-variable/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task getTaskPathVariable(@PathVariable String name) {
+        return Task.builder()
+                .id(Long.valueOf(1))
+                .name(name)
+                .completed(false)
+                .build();
     }
 }
 
