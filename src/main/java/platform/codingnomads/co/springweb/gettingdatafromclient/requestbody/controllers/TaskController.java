@@ -34,6 +34,34 @@ public class TaskController {
                 .body(savedTask);
     }
 
+    @PostMapping(value = "/api/tasks/completed", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Task> createCompletedTask(@RequestBody(required = true) Task task) throws URISyntaxException {
+        if (StringUtils.isEmpty(task.getName()) || task.getCompleted() == null) {
+            task.setCreatedAt(null);
+            return ResponseEntity.badRequest().body(task);
+        }
+        final Task savedTask = taskRepository
+                .save(Task.builder()
+                        .completed(true).name(task.getName().toUpperCase()).build());
+
+        return ResponseEntity.created(new URI("/api/tasks/completed" + savedTask.getId()))
+                .body(savedTask);
+    }
+
+    @PostMapping(value = "/api/tasks/not-completed", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Task> createNotCompletedTask(@RequestBody(required = true) Task task) throws URISyntaxException {
+        if (StringUtils.isEmpty(task.getName()) || task.getCompleted() == null) {
+            task.setCreatedAt(null);
+            return ResponseEntity.badRequest().body(task);
+        }
+        final Task savedTask = taskRepository
+                .save(Task.builder()
+                        .completed(false).name(task.getName().toLowerCase()).build());
+
+        return ResponseEntity.created(new URI("/api/tasks/not-completed" + savedTask.getId()))
+                .body(savedTask);
+    }
+
     @PostMapping(value = "/print")
     public ResponseEntity<?> printMessage(@RequestBody(required = false) String message) {
 
