@@ -15,6 +15,21 @@ public class GreetingController {
         return "greeting"; 
     }
 
+    @GetMapping("/practices")
+    public String practices(Model model) {
+        Practice p1 = new Practice("Writing Interfaces");
+        Practice p2 = new Practice("Creating Files with Vim");
+        Practice p3 = new Practice("Java Streams");
+
+        ArrayList<Practice> practices = new ArrayList<>();
+        practices.add(p1);
+        practices.add(p2);
+        practices.add(p3);
+
+        model.addAttribute("practices", practices);
+        return "practices";
+    }
+
     @GetMapping("/subjects")
     public String subjects(Model model) {
         Subject s1 = new Subject("Java", "Programming");

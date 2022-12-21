@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice</title>
+</head>
+<body>
+<div>
+    <h1>This is the practices in table form</h1>
+    <table border="1">
+        <tr th:each="practice: ${practices}">
+            <td th:text="${practice.practiceName}" />
+            <td>
+                <span th:if="${practice.practiceName} == 'Creating Files with Vim'" th:text="Vim" />
+                <span th:unless="${practice.practiceName} == 'Creating Files with Vim'" th:text="Other" />
+
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<div>
+    <h1>This is the practices in list form</h1>
+    <ul>
+        <li th:each="practice : ${practices}"
+            th:text=${practice.practiceName}>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
