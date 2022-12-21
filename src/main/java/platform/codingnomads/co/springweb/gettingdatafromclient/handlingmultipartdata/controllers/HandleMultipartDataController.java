@@ -27,7 +27,7 @@ public class HandleMultipartDataController {
     DatabaseFileRepository fileRepository;
 
     //@PostMapping("/uploadSingleFile")
-    @PostMapping()
+    @PostMapping("/uploadSingleFile")
     public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
 
         String fileName;
