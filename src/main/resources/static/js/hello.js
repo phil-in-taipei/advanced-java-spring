@@ -1,8 +1,9 @@
 function greeting() {
     alert("Hello Spring Developer!!");
+    toggleColorTenTimes();
 }
 
-function changeHeadingColor() {
+function toggleHeadingColor() {
     let allHeadings =document.getElementsByName("heading");
     console.log(allHeadings);
     for (let i = 0; i < allHeadings.length; i++) {
@@ -14,5 +15,13 @@ function changeHeadingColor() {
         }
 
     }
+}
+
+function toggleColorTenTimes() {
+    //for(i=0; i < 5; i++) {
+    //   console.log("Changing color in 3 seconds:")
+    //   setTimeout(toggleHeadingColor, 3000);
+    //}
+    setInterval(toggleHeadingColor, 3000);
 }
 
