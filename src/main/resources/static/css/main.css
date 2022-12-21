@@ -12,3 +12,8 @@ strong {
 p {
     font-family: sans-serif;
 }
+
+.btn-div {
+    margin-top: 10px;
+    border: 1px solid blue;
+}
