@@ -16,6 +16,12 @@ public class HomeController {
         return "greeting";
     }
 
+    @GetMapping("/goodbye")
+    @ResponseBody
+    public String adieu() {
+        return "I bid you farewell";
+    }
+
     @GetMapping("/hello")
     @ResponseBody
     public String greet() {
