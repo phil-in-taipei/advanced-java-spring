@@ -3,6 +3,7 @@ package platform.codingnomads.co.springtest.understandingandusingprofiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
@@ -11,9 +12,16 @@ public class TestMain implements CommandLineRunner {
 
     @Autowired
     CoffeePreferenceRepo repo;
+    @Bean
+    @Profile("bean_example")
+        public void printMessageToCommandLine() {
+        System.out.println("************Message to check that bean works****************");
+    }
 
     @Override
     public void run(String... args) throws Exception {
+
+        printMessageToCommandLine();
 
         repo.save(CoffeePreference.builder()
                 .type("Americano")
