@@ -49,10 +49,31 @@ public class TestingWebServices {
                         get("/goodbye"))
                 //print the response
                 .andDo(print())
-                //the response should have status 200 OK
                 .andExpect(status().isOk())
-                //test that this response has a body that contains a "Hello Back" String
+                .andExpect(content().contentType("text/plain;charset=UTF-8"))
                 .andExpect(content().string(containsString("I bid you farewell")));
+
+    }
+
+
+    @Test
+    public void backToRedirectShouldRedirect() throws Exception {
+        mockMvc
+                .perform(get("/back-to-redirect"))
+                .andDo(print())
+                .andExpect(status().is(302))
+                .andExpect(redirectedUrl("/redirect-target"));
+
+    }
+
+    @Test
+    public void redirectShouldHaveModelAndView() throws Exception {
+        mockMvc
+                .perform(get("/redirect-target"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("redirect-target"))
+                .andExpect(model().attribute("variable", "Model Variable String"));
 
     }
 

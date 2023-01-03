@@ -16,6 +16,19 @@ public class HomeController {
         return "greeting";
     }
 
+    @GetMapping("/redirect-target")
+    public String target(Model model) {
+        model.addAttribute("variable", "Model Variable String");
+        return "redirect-target";
+    }
+
+    @GetMapping("/back-to-redirect")
+   // @ResponseBody
+    public String backHome() {
+
+        return "redirect:/redirect-target";
+    }
+
     @GetMapping("/goodbye")
     @ResponseBody
     public String adieu() {
