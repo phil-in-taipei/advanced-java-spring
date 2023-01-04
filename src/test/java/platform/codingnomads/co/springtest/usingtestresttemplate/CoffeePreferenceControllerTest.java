@@ -7,6 +7,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import platform.codingnomads.co.springtest.usingtestresttemplate.models.CoffeePreference;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,8 +46,14 @@ public class CoffeePreferenceControllerTest {
     public void testGetAllCoffeePreferences() throws Exception {
         ResponseEntity<CoffeePreference[]> fetchedAllCoffeePreferences =
                testRestTemplate.getForEntity("/coffee", CoffeePreference[].class);
-        System.out.println(fetchedAllCoffeePreferences);
-
+        CoffeePreference[] results = fetchedAllCoffeePreferences.getBody();
+        //System.out.println(Arrays.toString(fetchedAllCoffeePreferences.getBody()));
+        //System.out.println("These are the test results");
+        for (int i = 1; i < Objects.requireNonNull(results).length; i++) {
+            //System.out.println(results[i - 1].toString());
+            assertThat(results[i - 1].getId()).isNotNull();
+        }
+        assertThat(results.length).isEqualTo(17);
     }
 
 

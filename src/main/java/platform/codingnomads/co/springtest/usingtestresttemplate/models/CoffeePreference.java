@@ -40,6 +40,18 @@ public class CoffeePreference {
         this.intensity = intensity;
     }
 
+    @Override
+    public String toString() {
+        return "CoffeePreference{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", sugar=" + sugar +
+                ", iced=" + iced +
+                ", size=" + size +
+                ", intensity=" + intensity +
+                '}';
+    }
+
     public enum Size {
         SMALL,
         MEDIUM,
