@@ -40,4 +40,14 @@ public class CoffeePreferenceControllerTest {
         //confirm ID was assigned
         assertThat(Objects.requireNonNull(postedCoffeePreference.getBody()).getId()).isNotNull();
     }
+
+    @Test
+    public void testGetAllCoffeePreferences() throws Exception {
+        ResponseEntity<CoffeePreference[]> fetchedAllCoffeePreferences =
+               testRestTemplate.getForEntity("/coffee", CoffeePreference[].class);
+        System.out.println(fetchedAllCoffeePreferences);
+
+    }
+
+
 }
