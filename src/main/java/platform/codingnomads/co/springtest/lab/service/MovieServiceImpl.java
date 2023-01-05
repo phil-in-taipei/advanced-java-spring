@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import platform.codingnomads.co.springtest.lab.entity.Movie;
+import platform.codingnomads.co.springtest.lab.exceptions.NoSuchMovieException;
 import platform.codingnomads.co.springtest.lab.repository.MovieRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +18,11 @@ public class MovieServiceImpl implements MovieService {
     private MovieRepository movieRepository;
 
     @Override
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    public ArrayList<Movie> getAllMovies() throws NoSuchMovieException {
+        ArrayList<Movie> movies = new ArrayList<Movie>(movieRepository.findAll());
+        if (movies.isEmpty()) {
+            throw new NoSuchMovieException("There are no movies yet :( feel free to add one though");
+        }
+        return movies;
     }
 }
