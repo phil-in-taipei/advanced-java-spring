@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MovieService {
     List<Movie> getAllMovies() throws NoSuchMovieException;
+
+    List<Movie> getMoviesByRating(Double rating) throws NoSuchMovieException;
 }

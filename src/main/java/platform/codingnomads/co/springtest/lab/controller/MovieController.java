@@ -31,4 +31,14 @@ public class MovieController {
         }
 
     }
+
+    @GetMapping("/rating/{rating}")
+    public ResponseEntity<?> getMoviesByRating(@PathVariable("rating") Double rating) {
+        try {
+            return ResponseEntity.ok(movieService.getMoviesByRating(rating));
+        } catch (NoSuchMovieException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+
+    }
 }

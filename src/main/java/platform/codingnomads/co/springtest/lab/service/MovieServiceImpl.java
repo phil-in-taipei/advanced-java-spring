@@ -25,4 +25,13 @@ public class MovieServiceImpl implements MovieService {
         }
         return movies;
     }
+
+    @Override
+    public ArrayList<Movie> getMoviesByRating(Double rating) throws NoSuchMovieException {
+        ArrayList<Movie> movies = new ArrayList<Movie>(movieRepository.findByRatingLessThanEqual(rating));
+        if (movies.isEmpty()) {
+            throw new NoSuchMovieException("There are no movies yet :( feel free to add one though");
+        }
+        return movies;
+    }
 }
