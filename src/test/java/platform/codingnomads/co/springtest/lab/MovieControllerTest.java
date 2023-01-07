@@ -51,14 +51,14 @@ public class MovieControllerTest {
                 .andExpect(jsonPath("$", hasSize(2)))
 
                 // must add 2 each time before running (or else delete table in db, and write 1)
-                .andExpect(jsonPath("$[0].id").value(43))
+                .andExpect(jsonPath("$[0].id").value(47))
 
                 .andExpect(jsonPath("$[0].name").value("The Shawshank Redemption"))
 
                 .andExpect(jsonPath("$[0].rating").value(9.3))
 
                 // must add 2 each time before running (or else delete table in db, and write 2)
-                .andExpect(jsonPath("$[1].id").value(44))
+                .andExpect(jsonPath("$[1].id").value(48))
 
                 .andExpect(jsonPath("$[1].name").value("The Pursuit of Happyness"))
 
@@ -91,7 +91,7 @@ public class MovieControllerTest {
     }
 
     @Test
-    @Order(1)
+    @Order(3)
     public void testGetMoviesByRating() throws Exception {
         this.mockMvc.perform(get("/rating/9"))
 
@@ -101,13 +101,13 @@ public class MovieControllerTest {
                 //expect it will be returned as JSON
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 
-                //expect there are 4 entries
+                //expect there is one entry with a rating below 9
                 .andExpect(jsonPath("$", hasSize(1)))
 
                 // must add 2 each time before running (or else delete table in db, and write 1)
 
                 // must add 2 each time before running (or else delete table in db, and write 2)
-                .andExpect(jsonPath("$[0].id").value(44))
+                .andExpect(jsonPath("$[0].id").value(48))
 
                 .andExpect(jsonPath("$[0].name").value("The Pursuit of Happyness"))
 
@@ -118,6 +118,21 @@ public class MovieControllerTest {
 
     @Test
     @Order(4)
+    public void testGetMoviesByRatingFailure() throws Exception {
+        //expect there are no entries with a rating below 6
+        this.mockMvc.perform(get("/rating/6"))
+
+                .andDo(print())
+
+                //expect 404 NOT FOUND
+                .andExpect(status().isNotFound())
+
+                //expect error message defined in RecipeService class
+                .andExpect(jsonPath("$").value("There are no movies below that rating yet :( feel free to add one though"));
+    }
+
+    @Test
+    @Order(5)
     public void testGetAllMoviesFailure() throws Exception {
         //delete all entries to force error
         movieRepository.deleteAll();
@@ -133,9 +148,4 @@ public class MovieControllerTest {
                 //expect error message defined in RecipeService class
                 .andExpect(jsonPath("$").value("There are no movies yet :( feel free to add one though"));
     }
-//
-//    @Test
-//    public void testGetAllMoviesSuccessMockService() {
-//
-//    }
 }
