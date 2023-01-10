@@ -12,6 +12,16 @@ public class HomeController {
         return "authorization/home";
     }
 
+    @GetMapping("/index")
+    public String indexPage() {
+        return "authorization/index";
+    }
+
+    @GetMapping("/landing")
+    public String landingPage() {
+        return "authorization/landing";
+    }
+
     @GetMapping("/admin")
     public String adminPage() {
         return "authorization/admin";
@@ -20,6 +30,11 @@ public class HomeController {
     @GetMapping("/superu")
     public String superUPage() {
         return "authorization/superu";
+    }
+
+    @GetMapping("/fantastic")
+    public String fantasticPage() {
+        return "authorization/fantastic";
     }
 
     @GetMapping("/mas")

@@ -20,6 +20,7 @@ public class UserPrincipal implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    //@Column(unique=true) ? should the column also have this constraint?
     @Column(nullable = false)
     private String username;
 
