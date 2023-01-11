@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{authorization/fragments/layout}">
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <h1>Spring Security Demo Super User Page List of Expired Users</h1>
+    <p>This page is only accessible to Admins</p>
+    <div align="center">
+        <h1>Expired Users List</h1>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${expiredUsersList}">
+                <td th:text="${user.id}">Customer ID</td>
+                <td th:text="${user.username}">Full Name</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

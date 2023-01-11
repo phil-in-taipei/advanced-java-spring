@@ -1,11 +1,21 @@
 package platform.codingnomads.co.springsecurity.authorization.addingauthorization.controllers;
 
+import platform.codingnomads.co.springsecurity.authorization.addingauthorization.services.CustomUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import platform.codingnomads.co.springsecurity.authorization.addingauthorization.models.UserPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private  CustomUserService customUserService;
 
     @GetMapping("/")
     public String homePage() {
@@ -15,6 +25,17 @@ public class HomeController {
     @GetMapping("/index")
     public String indexPage() {
         return "authorization/index";
+    }
+
+    //@RolesAllowed("ADMIN")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping("/expired-users")
+    public String expiredUsersPage(Model model) {
+        final List<UserPrincipal> expiredUsersList = customUserService.getAllUsersWithExpiredCredentials();
+        System.out.println(expiredUsersList);
+        // Once the customers are retrieved, you can store them in model and return it to the view
+        model.addAttribute("expiredUsersList", expiredUsersList);
+        return "authorization/expired-users";
     }
 
     @GetMapping("/landing")

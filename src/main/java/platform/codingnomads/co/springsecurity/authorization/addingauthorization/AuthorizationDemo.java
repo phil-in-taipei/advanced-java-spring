@@ -44,6 +44,8 @@ public class AuthorizationDemo implements CommandLineRunner {
         }
 
         UserMeta superUser = UserMeta.builder().name("super user").email("superuser@email.com").build();
+        UserMeta expiredUser1 = UserMeta.builder().name("expired user 1").email("expired1@email.com").build();
+        UserMeta expiredUser2 = UserMeta.builder().name("expired user 2").email("expired2@email.com").build();
         UserMeta admin = UserMeta.builder().name("admin").email("admin@email.com").build();
         UserMeta basicUser = UserMeta.builder().name("basic user").email("basicuser@email.com").build();
 
@@ -55,7 +57,11 @@ public class AuthorizationDemo implements CommandLineRunner {
                             new UserPrincipal("USER", passwordEncoder.encode("user"),
                                     Collections.singletonList(userAuth), basicUser),
                             new UserPrincipal("ADMIN", passwordEncoder.encode("admin"),
-                                    Arrays.asList(adminAuth, userAuth), admin)
+                                    Arrays.asList(adminAuth, userAuth), admin),
+                            new UserPrincipal("Expired1", passwordEncoder.encode("testpassword"),
+                                    Arrays.asList(userAuth, adminAuth), expiredUser1, false),
+                            new UserPrincipal("Expired2", passwordEncoder.encode("testpassword"),
+                                    Arrays.asList(userAuth, adminAuth), expiredUser2, false)
                     )
             );
         }

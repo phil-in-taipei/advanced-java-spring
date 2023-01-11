@@ -53,4 +53,16 @@ public class UserPrincipal implements UserDetails {
         credentialsNonExpired = true;
         enabled = true;
     }
+
+    public UserPrincipal(String username, String password, List<Authority> authorities,
+                         UserMeta userMeta, boolean credentialsNonExpired) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.userMeta = userMeta;
+        accountNonExpired = true;
+        accountNonLocked = true;
+        credentialsNonExpired = credentialsNonExpired;
+        enabled = true;
+    }
 }

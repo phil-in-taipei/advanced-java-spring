@@ -1,6 +1,7 @@
 package platform.codingnomads.co.springsecurity.authorization.addingauthorization.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,9 @@ import platform.codingnomads.co.springsecurity.authorization.addingauthorization
 import platform.codingnomads.co.springsecurity.authorization.addingauthorization.models.UserPrincipal;
 import platform.codingnomads.co.springsecurity.authorization.addingauthorization.repositories.UserMetaRepo;
 import platform.codingnomads.co.springsecurity.authorization.addingauthorization.repositories.UserPrincipalRepo;
+
+import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 @Service
 public class CustomUserService implements UserDetailsService {
@@ -33,4 +37,12 @@ public class CustomUserService implements UserDetailsService {
         userPrincipal.setUserMeta(userToUpdate);
         return updatedUser;
     }
+
+    //@RolesAllowed("ADMIN")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public List<UserPrincipal> getAllUsersWithExpiredCredentials() {
+        return userPrincipalRepo.findByCredentialsNonExpiredIsFalse();
+    }
+
+
 }
