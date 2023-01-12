@@ -1,6 +1,7 @@
 package platform.codingnomads.co.springsecurity.authorization.addingauthorization.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,8 @@ public class UserController {
     @Autowired
     CustomUserService userDetailsService;
 
+    // the MSA here is impractical, but it shows the concept :)
+    @PostAuthorize("returnObject.name == authentication.principal.username")
     @PostMapping("/update-user")
     public UserMeta updateUser(@RequestBody UserMeta userToUpdate) {
         return userDetailsService.updateUserMeta(userToUpdate);

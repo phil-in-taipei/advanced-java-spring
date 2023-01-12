@@ -9,6 +9,7 @@ import platform.codingnomads.co.springsecurity.authorization.custompermissions.m
 import platform.codingnomads.co.springsecurity.authorization.custompermissions.services.UserService;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -28,6 +29,14 @@ public class UserController {
         return userService.getUser(email);
     }
 
+    /*
+    @GetMapping("/username")
+    @ResponseBody
+    @PostAuthorize("hasPermission(returnObject, 'READ')")
+    public User getEntityByUsername(@RequestParam String username) {
+        return userService.getUser(username);
+    } */
+
     @GetMapping("/user/delete/{id}")
     @ResponseBody
     @PreAuthorize("hasPermission(#id, 'platform.codingnomads.co.springsecurity.authorization.custompermissions.models.User', 'DELETE')")
@@ -35,5 +44,17 @@ public class UserController {
         userService.deleteUser(id);
         return ("deleted user with id: " + id);
     }
+
+    /*
+    @PatchMapping("/user/update/{id}")
+    @ResponseBody
+    @PreAuthorize("hasPermission(#id, 'platform.codingnomads.co.springsecurity.authorization.custompermissions.models.User', 'EDIT')")
+    public String updateEntity(@PathVariable Long id) {
+        User updatedUser = userService.findById(id);
+        userService.updateUser(updatedUser);
+        return ("Updated user with id: " + id);
+    }
+
+     */
 
 }
