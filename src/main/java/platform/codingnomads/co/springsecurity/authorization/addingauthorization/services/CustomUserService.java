@@ -39,7 +39,7 @@ public class CustomUserService implements UserDetailsService {
     }
 
     //@RolesAllowed("ADMIN")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserPrincipal> getAllUsersWithExpiredCredentials() {
         return userPrincipalRepo.findByCredentialsNonExpiredIsFalse();
     }

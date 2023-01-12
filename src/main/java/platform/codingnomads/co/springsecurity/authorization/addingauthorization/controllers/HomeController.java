@@ -27,7 +27,7 @@ public class HomeController {
         return "authorization/index";
     }
 
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("ADMIN")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/expired-users")
     public String expiredUsersPage(Model model) {
